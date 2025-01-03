@@ -8,6 +8,7 @@ import ModernTemplate from './templates/ModernTemplate';
 import ProfessionalTemplate from './templates/ProfessionalTemplate';
 import MinimalTemplate from './templates/MinimalTemplate';
 import { FaDownload, FaMagic } from 'react-icons/fa';
+import html2pdf from 'html2pdf.js';
 
 const CoverLetterBuilder = () => {
   const { coverLetterData, generateWithAI } = useCoverLetter();
@@ -45,6 +46,18 @@ const CoverLetterBuilder = () => {
     { id: 'content', label: 'Content', component: <ContentEditor /> },
   ];
 
+  const handleDownload = () => {
+    const element = document.getElementById('cover-letter'); 
+    const opt = {
+      margin: 1,
+      filename: 'cover-letter.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save();
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-8">
@@ -62,7 +75,7 @@ const CoverLetterBuilder = () => {
                   AI Generate
                 </button>
                 <button
-                  onClick={() => {/* Implement download functionality */}}
+                  onClick={handleDownload}
                   className="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
                 >
                   <FaDownload className="mr-2" />
@@ -97,7 +110,7 @@ const CoverLetterBuilder = () => {
           {/* Preview Section */}
           <div className="bg-white p-8 rounded-lg shadow-lg">
             <h2 className="text-xl font-semibold mb-4">Preview</h2>
-            <div className="border rounded-lg p-6">
+            <div id="cover-letter" className="border rounded-lg p-6">
               {renderTemplate()}
             </div>
           </div>
