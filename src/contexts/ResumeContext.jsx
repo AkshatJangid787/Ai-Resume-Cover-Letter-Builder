@@ -15,13 +15,14 @@ export const ResumeProvider = ({ children }) => {
       location: '',
       linkedin: '',
       portfolio: '',
+      professionalDescription: '',
     },
     workExperience: [],
     education: [],
     skills: [],
     projects: [],
     certifications: [],
-    hobbies: [],
+    achievements: [], 
   });
 
   const [selectedTemplate, setSelectedTemplate] = useState('modern');

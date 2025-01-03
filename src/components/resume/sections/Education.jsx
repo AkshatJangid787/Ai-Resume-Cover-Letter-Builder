@@ -13,8 +13,11 @@ const Education = () => {
         degree: '',
         institution: '',
         location: '',
-        year: '',
+        startDate: '',
+        endDate: '',
+        current: false,
         gpa: '',
+        description: ''
       },
     ]);
   };
@@ -25,11 +28,12 @@ const Education = () => {
   };
 
   const handleChange = (index, field, value) => {
-    const newEducation = [...education];
-    newEducation[index] = {
-      ...newEducation[index],
-      [field]: value,
-    };
+    const newEducation = education.map((edu, i) => {
+      if (i === index) {
+        return { ...edu, [field]: value };
+      }
+      return edu;
+    });
     updateSection('education', newEducation);
   };
 
@@ -58,7 +62,7 @@ const Education = () => {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Degree</label>
+              <label className="block text-sm font-medium text-gray-700">Degree/Program</label>
               <input
                 type="text"
                 value={edu.degree}
@@ -75,7 +79,49 @@ const Education = () => {
                 value={edu.institution}
                 onChange={(e) => handleChange(index, 'institution', e.target.value)}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                placeholder="e.g., University of California"
               />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Start Date</label>
+              <input
+                type="text"
+                value={edu.startDate}
+                onChange={(e) => handleChange(index, 'startDate', e.target.value)}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                placeholder="e.g., Sep 2020"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">End Date</label>
+              <div className="flex items-center space-x-2">
+                <input
+                  type="text"
+                  value={edu.endDate}
+                  onChange={(e) => handleChange(index, 'endDate', e.target.value)}
+                  disabled={edu.current}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  placeholder="e.g., Jun 2024"
+                />
+                <label className="inline-flex items-center mt-1">
+                  <input
+                    type="checkbox"
+                    checked={edu.current}
+                    onChange={(e) => {
+                      handleChange(index, 'current', e.target.checked);
+                      if (e.target.checked) {
+                        handleChange(index, 'endDate', 'Present');
+                      } else {
+                        handleChange(index, 'endDate', '');
+                      }
+                    }}
+                    className="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  />
+                  <span className="ml-2 text-sm text-gray-600">Current</span>
+                </label>
+              </div>
             </div>
 
             <div>
@@ -85,22 +131,12 @@ const Education = () => {
                 value={edu.location}
                 onChange={(e) => handleChange(index, 'location', e.target.value)}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                placeholder="e.g., Berkeley, CA"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Year</label>
-              <input
-                type="text"
-                value={edu.year}
-                onChange={(e) => handleChange(index, 'year', e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                placeholder="e.g., 2018 - 2022"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700">GPA</label>
+              <label className="block text-sm font-medium text-gray-700">GPA (Optional)</label>
               <input
                 type="text"
                 value={edu.gpa}
@@ -109,9 +145,26 @@ const Education = () => {
                 placeholder="e.g., 3.8/4.0"
               />
             </div>
+
+            <div className="col-span-2">
+              <label className="block text-sm font-medium text-gray-700">Description (Optional)</label>
+              <textarea
+                value={edu.description}
+                onChange={(e) => handleChange(index, 'description', e.target.value)}
+                rows={2}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                placeholder="Add any relevant coursework, honors, or achievements..."
+              />
+            </div>
           </div>
         </div>
       ))}
+
+      {education.length === 0 && (
+        <p className="text-gray-500 text-center py-4">
+          No education added yet. Click "Add Education" to get started.
+        </p>
+      )}
     </div>
   );
 };

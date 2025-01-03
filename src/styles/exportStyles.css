@@ -1,0 +1,97 @@
+/* Export-specific styles */
+@media print {
+  /* General fixes */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Container fixes */
+  .resume-container {
+    width: 210mm !important;
+    min-height: 297mm !important;
+    padding: 20mm !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  /* Header section fixes */
+  .resume-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* Icon alignment fixes */
+  .contact-info svg,
+  .social-links svg {
+    vertical-align: middle !important;
+    display: inline-block !important;
+    width: 1em !important;
+    height: 1em !important;
+    position: relative !important;
+    top: -0.1em !important;
+  }
+
+  /* Text alignment fixes */
+  .resume-section {
+    page-break-inside: avoid !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .section-content {
+    display: block !important;
+  }
+
+  /* List alignment fixes */
+  ul, ol {
+    margin: 0.5rem 0 !important;
+    padding-left: 1.5rem !important;
+  }
+
+  li {
+    page-break-inside: avoid !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  /* Date alignment fixes */
+  .date-range {
+    white-space: nowrap !important;
+    text-align: right !important;
+  }
+
+  /* Link fixes */
+  a {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+
+  /* Grid fixes */
+  .grid {
+    display: block !important;
+  }
+
+  .grid > * {
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Spacing fixes */
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0 !important;
+    page-break-after: avoid !important;
+  }
+
+  p {
+    margin: 0.25rem 0 !important;
+  }
+
+  /* Border fixes */
+  .border-l-4 {
+    border-left-width: 4px !important;
+    padding-left: 1rem !important;
+  }
+}
