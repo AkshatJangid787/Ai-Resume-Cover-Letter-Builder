@@ -14,7 +14,7 @@ const SignUp = () => {
     e.preventDefault();
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      navigate('/'); // Redirect to homepage after successful signup
+      navigate('/dashboard'); // Redirect to dashboard after successful signup
     } catch (error) {
       setError(error.message);
     }
@@ -24,7 +24,7 @@ const SignUp = () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      navigate('/'); // Redirect to homepage after successful Google sign-in
+      navigate('/dashboard'); // Redirect to dashboard after successful Google sign-in
     } catch (error) {
       setError(error.message);
     }

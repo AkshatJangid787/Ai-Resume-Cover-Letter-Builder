@@ -17,83 +17,24 @@ const ResumeExportDialog = ({ isOpen, onClose, resumeData, resumeRef }) => {
           throw new Error('Resume element not found');
         }
 
-        // Add PDF-specific styles
+        // Add print-specific styles
         const style = document.createElement('style');
         style.textContent = `
           @media print {
-            /* Fix icon alignment in header */
-            .flex.items-center svg {
-              display: inline-block !important;
-              vertical-align: middle !important;
-              margin-top: 0 !important;
-              margin-bottom: 0 !important;
-              height: 1em !important;
-              width: 1em !important;
-              position: relative !important;
-              top: -0.1em !important;
-            }
-
-            /* Fix skill badges */
-            .flex.flex-wrap.gap-2 span {
-              display: inline-flex !important;
-              align-items: center !important;
-              justify-content: center !important;
-              margin: 0.25rem !important;
-              padding: 0.25rem 0.75rem !important;
-              border-radius: 9999px !important;
-              line-height: 1.25 !important;
-              height: auto !important;
-              position: relative !important;
-              top: 0 !important;
-            }
-
-            /* Preserve flex layouts */
-            .flex {
-              display: flex !important;
-            }
-            .flex-wrap {
-              flex-wrap: wrap !important;
-            }
-            .items-center {
-              align-items: center !important;
-            }
-            .justify-between {
-              justify-content: space-between !important;
-            }
-
-            /* Fix margins and spacing */
-            .mr-2 {
-              margin-right: 0.5rem !important;
-            }
-            .ml-2 {
-              margin-left: 0.5rem !important;
-            }
-            .gap-2 {
-              gap: 0.5rem !important;
-            }
-            .gap-4 {
-              gap: 1rem !important;
-            }
-
-            /* Preserve background colors */
-            .bg-blue-100 {
-              background-color: #dbeafe !important;
+            * {
               -webkit-print-color-adjust: exact !important;
               print-color-adjust: exact !important;
             }
 
-            /* Fix list styles */
-            .list-disc {
-              list-style-type: disc !important;
-              padding-left: 1.5rem !important;
+            svg {
+              width: 16px !important;
+              height: 16px !important;
+              margin-right: 8px !important;
+              vertical-align: -2px !important;
             }
 
-            /* Fix borders */
-            .border-l-4 {
-              border-left-width: 4px !important;
-            }
-            .border-blue-500 {
-              border-color: #3b82f6 !important;
+            .bg-blue-100 {
+              background-color: #dbeafe !important;
             }
           }
         `;
@@ -107,22 +48,20 @@ const ResumeExportDialog = ({ isOpen, onClose, resumeData, resumeRef }) => {
             scale: 2,
             useCORS: true,
             letterRendering: true,
-            scrollY: -window.scrollY,
-            width: element.offsetWidth,
-            height: element.offsetHeight,
-            windowWidth: element.offsetWidth,
-            windowHeight: element.offsetHeight
+            scrollY: -window.scrollY
           },
           jsPDF: { 
             unit: 'mm', 
             format: 'a4', 
-            orientation: 'portrait',
-            compress: true
+            orientation: 'portrait'
           }
         };
 
-        await html2pdf().set(opt).from(element).save();
-        document.head.removeChild(style);
+        try {
+          await html2pdf().set(opt).from(element).save();
+        } finally {
+          document.head.removeChild(style);
+        }
       } else if (type === 'word') {
         await exportResumeToWord(resumeData);
       }

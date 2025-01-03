@@ -1,0 +1,36 @@
+:root {
+  --background-light: #f3f4f6;
+  --background-dark: #1a1a1a;
+  --text-light: #333;
+  --text-dark: #f3f4f6;
+  --button-light: #007bff;
+  --button-dark: #0056b3;
+  --card-light: rgba(255, 255, 255, 0.9);
+  --card-dark: rgba(0, 0, 0, 0.9);
+}
+
+body.light-theme {
+  background-color: var(--background-light);
+  color: var(--text-light);
+}
+
+body.dark-theme {
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
+.landing-container {
+  background: var(--card-light);
+}
+
+.landing-container.dark-theme {
+  background: var(--card-dark);
+}
+
+.cta-button {
+  background-color: var(--button-light);
+}
+
+.cta-button.dark-theme {
+  background-color: var(--button-dark);
+}

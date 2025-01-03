@@ -7,7 +7,6 @@ import Skills from './sections/Skills';
 import Projects from './sections/Projects';
 import Certifications from './sections/Certifications';
 import Achievements from './sections/Achievements';
-import Summary from './sections/Summary';
 import ModernTemplate from './templates/ModernTemplate';
 import ProfessionalTemplate from './templates/ProfessionalTemplate';
 import MinimalTemplate from './templates/MinimalTemplate';
@@ -24,8 +23,6 @@ const ResumeBuilder = () => {
     switch (activeSection) {
       case 'personalInfo':
         return <PersonalInfo />;
-      case 'summary':
-        return <Summary />;
       case 'experience':
         return <WorkExperience />;
       case 'education':
@@ -87,7 +84,7 @@ const ResumeBuilder = () => {
           <div className="bg-white rounded-lg shadow-lg p-6">
             {/* Navigation */}
             <div className="flex flex-wrap gap-2 mb-6">
-              {['personalInfo', 'summary', 'experience', 'education', 'skills', 'projects', 'certifications', 'achievements'].map((section) => (
+              {['personalInfo', 'experience', 'education', 'skills', 'projects', 'certifications', 'achievements'].map((section) => (
                 <button
                   key={section}
                   onClick={() => setActiveSection(section)}

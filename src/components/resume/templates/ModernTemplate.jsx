@@ -20,31 +20,41 @@ const ModernTemplate = ({ data }) => {
         <div className="mt-2 flex flex-wrap gap-4 text-gray-600">
           {personalInfo.email && (
             <div className="flex items-center">
-              <FaEnvelope className="mr-2" />
+              <span className="icon-container">
+                <FaEnvelope className="icon" />
+              </span>
               {personalInfo.email}
             </div>
           )}
           {personalInfo.phone && (
             <div className="flex items-center">
-              <FaPhone className="mr-2" />
+              <span className="icon-container">
+                <FaPhone className="icon" />
+              </span>
               {personalInfo.phone}
             </div>
           )}
           {personalInfo.location && (
             <div className="flex items-center">
-              <FaMapMarkerAlt className="mr-2" />
+              <span className="icon-container">
+                <FaMapMarkerAlt className="icon" />
+              </span>
               {personalInfo.location}
             </div>
           )}
           {personalInfo.linkedin && (
             <div className="flex items-center">
-              <FaLinkedin className="mr-2" />
+              <span className="icon-container">
+                <FaLinkedin className="icon" />
+              </span>
               {personalInfo.linkedin}
             </div>
           )}
           {personalInfo.portfolio && (
             <div className="flex items-center">
-              <FaGlobe className="mr-2" />
+              <span className="icon-container">
+                <FaGlobe className="icon" />
+              </span>
               {personalInfo.portfolio}
             </div>
           )}

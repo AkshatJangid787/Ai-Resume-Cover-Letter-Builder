@@ -33,7 +33,8 @@ function App() {
                 <Routes>
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<SignUp />} />
-                  <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                  <Route path="/" element={<Navigate to="/landing" replace />} />
+                  <Route path="/landing" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
                   <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
                   <Route path="/resume-builder" element={<PrivateRoute><ResumeBuilder /></PrivateRoute>} />
                   <Route path="/cover-letter-builder" element={<PrivateRoute><CoverLetterBuilder /></PrivateRoute>} />
